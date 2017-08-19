@@ -1,0 +1,3 @@
+dev_01 class main method
+this is dev_01 only use!
+1.i do my thing no matter other
