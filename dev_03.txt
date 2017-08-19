@@ -1,8 +1,5 @@
 while do this all day?
 yes is it dev_03?
 3.while i need my own txt
-<<<<<<< HEAD
 this.3 but the 4 write something on it
-=======
 then 3 write something 3 self
->>>>>>> 3167898ae8b57dc4413d7c15894685790eec78cd
