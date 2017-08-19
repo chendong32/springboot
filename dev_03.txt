@@ -1,1 +1,2 @@
 then 3 write something 3 self
+i can see i have 5
