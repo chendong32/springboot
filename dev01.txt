@@ -1,2 +1,0 @@
-dev_01 class main method
-this is dev_01 only use!
