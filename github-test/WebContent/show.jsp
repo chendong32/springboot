@@ -8,13 +8,13 @@
 <script type="text/javascript">
 	
 	function back() {
-		window.location.href="index.jsp";
+		window.location.href="login.jsp";
 	}
 
 </script>
 </head>
 <body>
 成功展示的页面
-<input type="button" onclick="back()" value="首页"/>
+<input type="button" onclick="back()" value="退出"/>
 </body>
 </html>
