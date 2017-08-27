@@ -14,7 +14,7 @@ public class UserBusiness {
 	
 	public void createUserInfo(List<UserVO> list,String userdb) throws IOException{
 		
-		File file = new File(userdb+"/userdb");
+		File file = new File(userdb);
 		FileOutputStream os = new FileOutputStream(file);  
         ObjectOutputStream oos = new ObjectOutputStream(os);
         oos.writeObject(list);
@@ -25,7 +25,7 @@ public class UserBusiness {
 	@SuppressWarnings("unchecked")
 	public List<UserVO> findUserInfo(String userdb) throws IOException, ClassNotFoundException{
 		
-		FileInputStream is = new FileInputStream(userdb+"/userdb");
+		FileInputStream is = new FileInputStream(userdb);
 		ObjectInputStream ois = new ObjectInputStream(is);
 		List<UserVO> list = (List<UserVO>) ois.readObject();
 		ois.close();
