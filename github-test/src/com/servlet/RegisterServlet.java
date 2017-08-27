@@ -1,8 +1,6 @@
 package com.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.business.CommonBusiness;
 import com.business.UserBusiness;
 import com.pojo.UserVO;
 
@@ -22,22 +19,10 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		CommonBusiness<UserVO> c= new CommonBusiness<UserVO>();
-		String userdb = c.getUserdb(req);
-		UserVO userVO = c.getVO(req, new UserVO());
-		
+		String opr = "register";
 		UserBusiness userBusiness = new UserBusiness();
-		List<UserVO> list = new ArrayList<UserVO>();
-		try {
-			list = userBusiness.findUserInfo(userdb);
-			if(null!=list&&list.size()==5){
-				list.clear();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		list.add(userVO);
-		userBusiness.createUserInfo(list, userdb);
+		userBusiness.doBusiness(req, new UserVO(),opr);
+		
 		resp.sendRedirect("show.jsp");
 	}
 
@@ -45,7 +30,5 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
-	
-	
 
 }
