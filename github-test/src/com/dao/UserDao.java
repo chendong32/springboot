@@ -10,8 +10,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.pojo.UserVO;
 
+@Component
 public class UserDao {
 
 	public void createUserInfo(List<UserVO> list, String userdb) throws IOException {

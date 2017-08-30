@@ -2,26 +2,29 @@ package com.servlet;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
 import com.business.UserBusiness;
 import com.pojo.UserVO;
 
-@WebServlet("/loginServlet.do")
+@Component
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Resource
+	UserBusiness userBusiness;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String opr = "login";
-		UserBusiness userBusiness = new UserBusiness();
-		Boolean flag = userBusiness.doBusiness(req, new UserVO(),opr);
+	
+		Boolean flag = userBusiness.doBusiness(req, new UserVO());
 		
 		if (flag) {
 			resp.sendRedirect("show.jsp");
