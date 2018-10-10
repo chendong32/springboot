@@ -1,5 +1,3 @@
 # springboot
-study-github
-hello
-is anybody here!
-so four is over~
+1.去除tomcat插件
+2.mysql8
