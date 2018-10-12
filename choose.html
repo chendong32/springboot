@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>choose</title>
+</head>
+<body>
+
+<canvas id="choose" width="95" height="95" >GAME OVER!</canvas>
+
+<script>
+    var ctx;
+
+    function init(){
+        var canvas = document.getElementById('choose');
+        if (!canvas.getContext) return;
+        ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "#F00";
+        ctx.lineWidth=5;
+
+        ctx.beginPath();
+        ctx.moveTo(0, 15);
+        ctx.quadraticCurveTo(0, 0, 15, 0);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, 80);
+        ctx.quadraticCurveTo(0, 95, 15, 95);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(80, 0);
+        ctx.quadraticCurveTo(95, 0, 95, 15);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(95, 80);
+        ctx.quadraticCurveTo(95, 95, 80, 95);
+        ctx.stroke();
+    }
+    init();
+
+</script>
+
+</body>
+</html>

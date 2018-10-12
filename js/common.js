@@ -34,6 +34,11 @@ function init() {
             com.ct.drawImage(img_b, 7 + (95 + 11) * j, 169 + (95 + 12) * i);
         }
     }
+    var choose = new Image();
+    choose.src = "./img/cr.png";
+    com.ct.drawImage(choose, 7 +(95 + 11) * 4, 169 );
+
+    com.ct.drawImage(choose, 7 +(95 + 11) * 4 , 169 +(95 + 12) * 9);
 
 };
 
