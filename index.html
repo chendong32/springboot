@@ -6,52 +6,9 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="960" height="1596">GAME OVER!</canvas>
+<canvas id="chess" width="960" height="1596" style="background-image: url('./img/bg.png')">GAME OVER!</canvas>
 
-<script>
-    var ctx;
-    var img_bg;
-
-    function init() {
-        img_bg = new Image();
-        img_bg.src = "./img/bg.png";
-
-        var Map = [
-            ['b_c_0', 'b_m_0', 'b_x_0', 'b_s_0', 'b_j_0', 'b_s_1', 'b_x_1', 'b_m_1', 'b_c_1'],
-            [, , , , , , , ,],
-            [, 'b_p_0', , , , , , 'b_p_1',],
-            ['b_z_0', , 'b_z_1', , 'b_z_2', , 'b_z_3', , 'b_z_4'],
-            [, , , , , , , ,],
-            [, , , , , , , ,],
-            ['r_z_0', , 'r_z_1', , 'r_z_2', , 'r_z_3', , 'r_z_4'],
-            [, 'r_p_0', , , , , , 'r_p_1',],
-            [, , , , , , , ,],
-            ['r_c_0', 'r_m_0', 'r_x_0', 'r_s_0', 'r_j_0', 'r_s_1', 'r_x_1', 'r_m_1', 'r_c_1']
-        ];
-
-        var canvas = document.getElementById('myCanvas');
-        if (!canvas.getContext) return;
-        ctx = canvas.getContext("2d");
-        ctx.drawImage(img_bg, 0, 0);
-
-        ctx.shadowOffsetX = 2; // 设置水平位移
-        ctx.shadowOffsetY = 4; // 设置垂直位移
-        ctx.shadowBlur = 2; // 设置模糊度
-        ctx.shadowColor = "rgba(0,0,0,0.4)"; // 设置阴影颜色
-
-        for (var i = 0; i < Map.length; i++) {
-            for (var j = 0; j < Map[i].length; j++) {
-                var img_b = new Image();
-                if (Map[i][j] == undefined)
-                    continue;
-                img_b.src = "./img/" + Map[i][j].substr(0, 3) + ".png";
-                ctx.drawImage(img_b, 7 + (95 + 11) * j, 169 + (95 + 12) * i);
-            }
-        }
-
-    }
-    init();
-
-</script>
+<script src="js/common.js"></script>
+<script src="js/play.js"></script>
 </body>
 </html>
