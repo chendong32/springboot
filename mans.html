@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chessman</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="95" height="95">GAME OVER!</canvas>
+
+<script>
+    var ctx;
+    var img_bg;
+
+    function init(){
+        img_bg = new Image();
+        img_bg.src = "./img/r_z.png";
+        var canvas = document.getElementById('myCanvas');
+        if (!canvas.getContext) return;
+        ctx = canvas.getContext("2d");
+        img_bg.onload = function () {
+            draw();
+        };
+
+        ctx.beginPath();
+        ctx.arc(47.5,47.5, 47.5, 0, Math.PI * 2);
+        ctx.clip();
+    }
+    init();
+
+    function draw(){
+        ctx.drawImage(img_bg, 0, 0);
+    }
+
+</script>
+</body>
+</html>
