@@ -7,6 +7,8 @@ com.pointStartX = 7;
 com.pointStartY = 169;
 com.spaceX = 95 + 11;
 com.spaceY = 95 + 12;
+com.width = 960;
+com.height = 1596;
 
 function init() {
     com.canvas = document.getElementById("chess");
@@ -15,6 +17,7 @@ function init() {
     com.ct.shadowOffsetY = 4;
     com.ct.shadowBlur = 2;
     com.ct.shadowColor = "rgba(0,0,0,0.4)";
+    com.mans = com.mans||[];
     loadImages();
 }
 com.images = ['a_b', 'b_c', 'b_j', 'b_m', 'b_p', 'b_s', 'b_x', 'b_z', 'r_c', 'r_j', 'r_m', 'r_p', 'r_s', 'r_x', 'r_z', 'z_c'];
@@ -28,32 +31,62 @@ function loadImages() {
         com[i].image.src = "./img/" + com.images[i] + ".png";
     }
     com.zcImg = new Image();
-    com.zcImg.src = "./img/" + com.images[com.images.length - 1] + ".png";
+    com.zcImg.src = "./img/" + com.images[15] + ".png";
 }
 
 com.initMap = [
-    ['b_c_1', 'b_m_3', 'b_x_6', 'b_s_5', 'b_j_2', 'b_s_5', 'b_x_6', 'b_m_3', 'b_c_1'],
+    [1, 3, 6, 5, 2, 5, 6, 3, 1],
     [, , , , , , , ,],
-    [, 'b_p_4', , , , , , 'b_p_4',],
-    ['b_z_7', , 'b_z_7', , 'b_z_7', , 'b_z_7', , 'b_z_7'],
+    [, 4, , , , , , 4,],
+    [7, , 7, , 7, , 7, , 7],
     [, , , , , , , ,],
     [, , , , , , , ,],
-    ['r_z_14', , 'r_z_14', , 'r_z_14', , 'r_z_14', , 'r_z_14'],
-    [, 'r_p_11', , , , , , 'r_p_11',],
+    [14, , 14, , 14, , 14, , 14],
+    [, 11, , , , , , 11,],
     [, , , , , , , ,],
-    ['r_c_8', 'r_m_10', 'r_x_13', 'r_s_12', 'r_j_9', 'r_s_12', 'r_x_13', 'r_m_10', 'r_c_8']
+    [8, 10, 13, 12, 9, 12, 13, 10, 8]
 ];
+
 window.onload = function () {
     console.log("onload");
-    com.ct.drawImage(com.abImg, 0, 0);
-    for (var i = 0; i < com.initMap.length; i++) {
-        for (var j = 0; j < com.initMap[i].length; j++) {
-            if (com.initMap[i][j]) {
-                var key = com.initMap[i][j].substr(4);
-                com.ct.drawImage(com[key].image, com.pointStartX + com.spaceX * j, com.pointStartY + com.spaceY * i);
+    com.bg = createBg();
+    com.bg.show();
+    com.createMans(com.initMap);
+    com.showMans();
+
+};
+
+com.createMans = function (map) {
+    for (var i = 0; i < map.length; i++) {
+        for (var j = 0; j < map[i].length; j++) {
+            if (map[i][j]) {
+                var key = map[i][j];
+                com.mans.push(createMan(key, com.pointStartX + com.spaceX * j, com.pointStartY + com.spaceY * i));
             }
         }
     }
 };
+com.showMans = function () {
+    for (var i = 0; i < com.mans.length; i++) {
+        com.ct.drawImage(com.mans[i].image, com.mans[i].x, com.mans[i].y);
+    }
+};
+function createMan(key, x, y){
+    var man = new Object;
+    man.x = x||0;
+    man.y = y||0;
+    man.image = com[key].image;
+    return man;
+}
+function createBg(x ,y) {
+    var bg = new Object;
+    bg.x = x||0;
+    bg.y = y||0;
+    bg.isShow = true;
+    bg.show = function () {
+        if (bg.isShow) com.ct.drawImage(com.abImg, bg.x, bg.y);
+    };
+    return bg;
+}
 
 init();
