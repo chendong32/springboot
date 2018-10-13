@@ -18,6 +18,7 @@ function init() {
     com.ct.shadowOffsetY = 4;
     com.ct.shadowBlur = 2;
     com.ct.shadowColor = "rgba(0,0,0,0.4)";
+    com.childList = com.childList||[];
     com.mans = com.mans||[];
     com.loadImages();
 }
@@ -38,7 +39,7 @@ com.getDomXY = function (dom){
         left += current.offsetLeft;
         top += current.offsetTop;
         current = current.offsetParent;
-    };
+    }
     return {x:left,y:top};
 };
 
@@ -58,6 +59,7 @@ com.initMap = [
 window.onload = function () {
     console.log("onload");
     com.bg = createBg();
+    com.childList = [com.bg];
     com.bg.show();
     com.createMans(com.initMap);
     play.init();
@@ -69,30 +71,41 @@ com.createMans = function (map) {
         for (var j = 0; j < map[i].length; j++) {
             if (map[i][j]) {
                 var key = map[i][j];
-                com.mans.push(createMan(key, com.pointStartX + com.spaceX * j, com.pointStartY + com.spaceY * i));
+                var man = createMan(key, com.pointStartX + com.spaceX * j, com.pointStartY + com.spaceY * i);
+                com.mans[i*10+j] = man;
+                com.childList.push(man);
             }
         }
     }
 };
 com.showMans = function () {
     for (var i = 0; i < com.mans.length; i++) {
-        com.ct.drawImage(com.mans[i].image, com.mans[i].x, com.mans[i].y);
+        if(com.mans[i])
+        com.mans[i].show();
     }
 };
 function createMan(key, x, y){
     var man = new Object;
     man.x = x||0;
     man.y = y||0;
+    man.alpha = 1;
     man.image = com[key].image;
+    man.show = function () {
+        com.ct.save();
+        com.ct.globalAlpha = man.alpha;
+        com.ct.drawImage(man.image, man.x, man.y);
+        com.ct.restore();
+    };
     return man;
 }
 function createBg(x ,y) {
     var bg = new Object;
     bg.x = x||0;
     bg.y = y||0;
+    bg.image = com[0].image;
     bg.isShow = true;
     bg.show = function () {
-        if (bg.isShow) com.ct.drawImage(com[0].image, bg.x, bg.y);
+        if (bg.isShow) com.ct.drawImage(bg.image, bg.x, bg.y);
     };
     return bg;
 }
@@ -102,6 +115,12 @@ com.arr2Clone = function (arr){
         newArr[i] = arr[i].slice();
     }
     return newArr;
+};
+com.show = function (){
+    com.ct.clearRect(0, 0, com.width, com.height);
+    for (var i=0; i<com.childList.length ; i++){
+        com.childList[i].show();
+    }
 };
 
 init();
