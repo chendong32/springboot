@@ -11,6 +11,7 @@ com.width = 960;
 com.height = 1596;
 
 function init() {
+    console.log("init");
     com.canvas = document.getElementById("chess");
     com.ct = com.canvas.getContext("2d");
     com.ct.shadowOffsetX = 2;
@@ -18,21 +19,28 @@ function init() {
     com.ct.shadowBlur = 2;
     com.ct.shadowColor = "rgba(0,0,0,0.4)";
     com.mans = com.mans||[];
-    loadImages();
+    com.loadImages();
 }
 com.images = ['a_b', 'b_c', 'b_j', 'b_m', 'b_p', 'b_s', 'b_x', 'b_z', 'r_c', 'r_j', 'r_m', 'r_p', 'r_s', 'r_x', 'r_z', 'z_c'];
-function loadImages() {
+com.loadImages = function () {
     console.log("loadImages");
-    com.abImg = new Image();
-    com.abImg.src = "./img/" + com.images[0] + ".png";
-    for (var i = 1; i < com.images.length - 1; i++) {
+    for (var i = 0; i < com.images.length ; i++) {
         com[i] = {};
         com[i].image = new Image();
         com[i].image.src = "./img/" + com.images[i] + ".png";
     }
-    com.zcImg = new Image();
-    com.zcImg.src = "./img/" + com.images[15] + ".png";
-}
+};
+com.getDomXY = function (dom){
+    var left = dom.offsetLeft;
+    var top = dom.offsetTop;
+    var current = dom.offsetParent;
+    while (current !== null){
+        left += current.offsetLeft;
+        top += current.offsetTop;
+        current = current.offsetParent;
+    };
+    return {x:left,y:top};
+};
 
 com.initMap = [
     [1, 3, 6, 5, 2, 5, 6, 3, 1],
@@ -52,7 +60,7 @@ window.onload = function () {
     com.bg = createBg();
     com.bg.show();
     com.createMans(com.initMap);
-    com.showMans();
+    play.init();
 
 };
 
@@ -84,9 +92,16 @@ function createBg(x ,y) {
     bg.y = y||0;
     bg.isShow = true;
     bg.show = function () {
-        if (bg.isShow) com.ct.drawImage(com.abImg, bg.x, bg.y);
+        if (bg.isShow) com.ct.drawImage(com[0].image, bg.x, bg.y);
     };
     return bg;
 }
+com.arr2Clone = function (arr){
+    var newArr=[];
+    for (var i=0; i<arr.length ; i++){
+        newArr[i] = arr[i].slice();
+    }
+    return newArr;
+};
 
 init();
