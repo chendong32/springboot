@@ -7,7 +7,7 @@ play.init = function () {
     console.log("play");
     play.isPlay = true;
     play.nowMankey = false;
-    play.map = com.arr2Clone(com.initMap);		//初始化棋盘
+    play.map = com.arr2Clone(com.initMap);
     play.mans = com.mans;
     play.showMans = com.showMans;
     play.show = com.show;
@@ -49,7 +49,9 @@ play.clickMan = function (key, x, y) {
     play.nowMankey = x + y * 10;
     var man = play.mans[play.nowMankey];
     man.alpha = 0.6;
-
+    com.cr.x = x;
+    com.cr.y = y;
+    com.cr.isShow = true;
     play.show();
 };
 
