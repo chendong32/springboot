@@ -89,16 +89,20 @@ com.showMans = function () {
 function createMan(key, x, y) {
     var man = new Object;
     man.key = key;
+    man.pater = key - 7 > 0 ? 1 : 0;
     man.x = x || 0;
     man.y = y || 0;
     man.alpha = 1;
     man.image = com[key].image;
     man.ps = [];
+    man.isShow = true;
     man.show = function () {
+        if (man.isShow) {
         com.ct.save();
         com.ct.globalAlpha = man.alpha;
         com.ct.drawImage(man.image, com.pointStartX + com.spaceX * man.x, com.pointStartY + com.spaceY * man.y);
         com.ct.restore();
+        }
     };
     return man;
 }

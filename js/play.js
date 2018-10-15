@@ -41,35 +41,44 @@ play.getClickMan = function (e) {
     return (play.map[y][x] && play.map[y][x] != "0") ? play.map[y][x] : false;
 };
 play.clickMan = function (key, x, y) {
-    if (play.mans[play.nowMankey]) {
-        play.mans[play.nowMankey].alpha = 1;
+    var man = play.mans[x + y * 10];
+    if(man.pater){
+        if (play.mans[play.nowMankey]) {
+            play.mans[play.nowMankey].alpha = 1;
+        }
+        play.nowMankey = x + y * 10;
+        man.alpha = 0.6;
+        com.cr.x = x;
+        com.cr.y = y;
+        com.cr.isShow = true;
+        play.show();
+    }else if (play.nowMankey && play.mans[play.nowMankey].pater != man.pater) {
+        var p_man = play.mans[play.nowMankey];
+        var key = x + y * 10;
+        delete play.map[p_man.y][p_man.x];
+        play.mans[key].isShow = false;
+        p_man.x = x;
+        p_man.y = y;
+        p_man.alpha = 1;
+        com.cr.x = x;
+        com.cr.y = y;
+        play.map[y][x] = p_man.key;
         play.nowMankey = false;
+        play.show();
     }
-    play.nowMankey = x + y * 10;
-    var man = play.mans[play.nowMankey];
-    man.alpha = 0.6;
-    com.cr.x = x;
-    com.cr.y = y;
-    com.cr.isShow = true;
-    play.show();
 };
 play.clickPoint = function (x, y) {
     console.log(play.nowMankey);
     var key = play.nowMankey;
     var man = play.mans[key];
-    if (play.nowMankey >= 0) {
-
+    if (play.nowMankey && play.nowMankey >= 0) {
         delete play.map[man.y][man.x];
-        //delete play.mans[key];
         play.map[y][x] = man.key;
-        play.mans[y * 10 + x] = man;
-
         man.x = x;
         man.y = y;
         man.alpha = 1;
         com.cr.x = x;
         com.cr.y = y;
-
         play.nowMankey = false;
         play.show();
     }
