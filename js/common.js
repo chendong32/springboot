@@ -69,12 +69,12 @@ window.onload = function () {
 };
 
 com.createMans = function (map) {
-    for (var i = 0; i < map.length; i++) {
-        for (var j = 0; j < map[i].length; j++) {
-            if (map[i][j]) {
-                var key = map[i][j];
-                var man = createMan(key, com.pointStartX + com.spaceX * j, com.pointStartY + com.spaceY * i);
-                com.mans[i * 10 + j] = man;
+    for (var y = 0; y < map.length; y++) {
+        for (var x = 0; x < map[y].length; x++) {
+            if (map[y][x]) {
+                var key = map[y][x];
+                var man = createMan(key, x, y);
+                com.mans[y * 10 + x] = man;
                 com.childList.push(man);
             }
         }
@@ -88,14 +88,16 @@ com.showMans = function () {
 };
 function createMan(key, x, y) {
     var man = new Object;
+    man.key = key;
     man.x = x || 0;
     man.y = y || 0;
     man.alpha = 1;
     man.image = com[key].image;
+    man.ps = [];
     man.show = function () {
         com.ct.save();
         com.ct.globalAlpha = man.alpha;
-        com.ct.drawImage(man.image, man.x, man.y);
+        com.ct.drawImage(man.image, com.pointStartX + com.spaceX * man.x, com.pointStartY + com.spaceY * man.y);
         com.ct.restore();
     };
     return man;

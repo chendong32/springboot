@@ -20,11 +20,10 @@ play.clickCanvas = function (e) {
     var key = play.getClickMan(e);
     var point = play.getClickPoint(e);
     console.log(point);
-    console.log(key);
     if (key) {
         play.clickMan(key, point.x, point.y);
     } else {
-        //play.clickPoint(point.x,point.y);
+        play.clickPoint(point.x, point.y);
     }
 };
 
@@ -54,6 +53,28 @@ play.clickMan = function (key, x, y) {
     com.cr.isShow = true;
     play.show();
 };
+play.clickPoint = function (x, y) {
+    console.log(play.nowMankey);
+    var key = play.nowMankey;
+    var man = play.mans[key];
+    if (play.nowMankey) {
+
+        delete play.map[man.y][man.x];
+        //delete play.mans[key];
+        play.map[y][x] = man.key;
+        play.mans[y * 10 + x] = man;
+
+        man.x = x;
+        man.y = y;
+        man.alpha = 1;
+        com.cr.x = x;
+        com.cr.y = y;
+
+        play.nowMankey = false;
+        play.show();
+    }
+};
+
 
 
 
