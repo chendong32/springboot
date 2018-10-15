@@ -57,7 +57,7 @@ play.clickPoint = function (x, y) {
     console.log(play.nowMankey);
     var key = play.nowMankey;
     var man = play.mans[key];
-    if (play.nowMankey) {
+    if (play.nowMankey >= 0) {
 
         delete play.map[man.y][man.x];
         //delete play.mans[key];
