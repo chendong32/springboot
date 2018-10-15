@@ -56,7 +56,7 @@ com.initMap = [
     [8, 10, 13, 12, 9, 12, 13, 10, 8]
 ];
 
-var generateKey = [
+com.generateKey = [
     [2, 3, 4, 5, 6, 7, 8, 9, 10],
     [, , , , , , , ,],
     [, 11, , , , , , 12,],
@@ -87,7 +87,7 @@ com.createMans = function (map) {
             if (map[y][x]) {
                 var key = map[y][x];
                 var man = createMan(key, x, y);
-                com.mans[generateKey[y][x]] = man;
+                com.mans[com.generateKey[y][x]] = man;
                 com.childList.push(man);
             }
         }
@@ -101,7 +101,7 @@ com.showMans = function () {
 };
 function createMan(key, x, y) {
     var man = new Object;
-    man.key = generateKey[y][x];
+    man.key = com.generateKey[y][x];
     man.pater = key - 7 > 0 ? 1 : 0;
     man.x = x || 0;
     man.y = y || 0;
@@ -153,6 +153,9 @@ com.show = function () {
     for (var i = 0; i < com.childList.length; i++) {
         com.childList[i].show();
     }
+};
+com.get = function (id){
+    return document.getElementById(id);
 };
 
 init();
