@@ -41,7 +41,7 @@ play.getClickMan = function (e) {
 };
 play.clickMan = function (key, x, y) {
     var man = play.mans[key];
-    if(man.pater){
+    if(!play.nowMankey){
         if (play.mans[play.nowMankey]) {
             play.mans[play.nowMankey].alpha = 1;
         }
@@ -51,7 +51,7 @@ play.clickMan = function (key, x, y) {
         com.cr.y = y;
         com.cr.isShow = true;
         play.show();
-    }else if (play.nowMankey && play.mans[play.nowMankey].pater != man.pater) {
+    }else if (play.mans[play.nowMankey].pater != man.pater) {
         var p_man = play.mans[play.nowMankey];
         generateKey[y][x] = p_man.key;
         delete generateKey[p_man.y][p_man.x];
