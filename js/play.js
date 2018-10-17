@@ -34,8 +34,8 @@ play.clickCanvas = function (e) {
 
 play.getClickPoint = function (e) {
     var domXY = com.getDomXY(com.canvas);
-    var x = Math.round((e.pageX - domXY.x - com.pointStartX - 20) / com.spaceX);
-    var y = Math.round((e.pageY - domXY.y - com.pointStartY - 20) / com.spaceY);
+    var x = Math.round((e.pageX - domXY.x - com.pointStartX - 52) / com.spaceX);
+    var y = Math.round((e.pageY - domXY.y - com.pointStartY - 53) / com.spaceY);
     return {"x": x, "y": y}
 };
 play.getClickMan = function (e) {
@@ -77,7 +77,7 @@ play.clickPoint = function (x, y) {
     console.log(play.nowMankey);
     var key = play.nowMankey;
     var man = play.mans[key];
-    if (play.nowMankey) {
+    if (play.nowMankey && y >= 0 && y <= 9) {
         var pace = man.y + "" + man.x;
         play.generateKey[y][x] = key;
         delete play.generateKey[man.y][man.x];
