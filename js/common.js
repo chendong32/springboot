@@ -111,11 +111,15 @@ function createMan(key, x, y) {
     man.isShow = true;
     man.show = function () {
         if (man.isShow) {
-        com.ct.save();
-        com.ct.globalAlpha = man.alpha;
-        com.ct.drawImage(man.image, com.pointStartX + com.spaceX * man.x, com.pointStartY + com.spaceY * man.y);
-        com.ct.restore();
+            com.ct.save();
+            com.ct.globalAlpha = man.alpha;
+            com.ct.drawImage(man.image, com.pointStartX + com.spaceX * man.x, com.pointStartY + com.spaceY * man.y);
+            com.ct.restore();
         }
+    };
+    man.bl = function (map) {
+        var map = map || play.generateKey;
+        return com.bylaw[com.initMap[y][x]](man.x, man.y, map)
     };
     return man;
 }
@@ -154,8 +158,110 @@ com.show = function () {
         com.childList[i].show();
     }
 };
-com.get = function (id){
+com.get = function (id) {
     return document.getElementById(id);
+};
+
+com.bylaw = {};
+
+com.bylaw[1] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[2] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[3] = function (x, y, map) {
+    var d = [];
+
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[4] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[5] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[6] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[7] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].pater != 0)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y > 4 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].pater != 0)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y > 4 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].pater != 0)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[8] = function (x, y, map) {
+    var d = [];
+    if (y - 1 >= 0 && (!com.mans[map[y - 1][x]] || com.mans[map[y - 1][x]].my != my)) d.push([x, y - 1]);
+    if (x + 1 <= 8 && y <= 4 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y <= 4 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[9] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[10] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[11] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[12] = function (x, y, map) {
+    var d = [];
+    if (y + 1 <= 9 && (!com.mans[map[y + 1][x]] || com.mans[map[y + 1][x]].my != my)) d.push([x, y + 1]);
+    if (x + 1 <= 8 && y >= 6 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y >= 6 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[13] = function (x, y, map) {
+    var d = [];
+    if (y - 1 >= 0 && (!com.mans[map[y - 1][x]] || com.mans[map[y - 1][x]].my != my)) d.push([x, y - 1]);
+    if (x + 1 <= 8 && y <= 4 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y <= 4 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
+};
+com.bylaw[14] = function (x, y, map) {
+    var d = [];
+    if (y - 1 >= 0 && (!com.mans[map[y - 1][x]] || com.mans[map[y - 1][x]].my != my)) d.push([x, y - 1]);
+    if (x + 1 <= 8 && y <= 4 && (!com.mans[map[y][x + 1]] || com.mans[map[y][x + 1]].my != my)) d.push([x + 1, y]);
+    if (x - 1 >= 0 && y <= 4 && (!com.mans[map[y][x - 1]] || com.mans[map[y][x - 1]].my != my)) d.push([x - 1, y]);
+    return d;
 };
 
 init();

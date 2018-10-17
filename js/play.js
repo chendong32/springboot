@@ -56,6 +56,7 @@ play.clickMan = function (key, x, y) {
         com.cr.x = x;
         com.cr.y = y;
         com.cr.isShow = true;
+        man.ps = man.bl();
         play.show();
     }else if (play.mans[play.nowMankey].pater != man.pater) {
         var p_man = play.mans[play.nowMankey];
@@ -77,7 +78,7 @@ play.clickPoint = function (x, y) {
     console.log(play.nowMankey);
     var key = play.nowMankey;
     var man = play.mans[key];
-    if (play.nowMankey && y >= 0 && y <= 9) {
+    if (play.nowMankey && y >= 0 && y <= 9 && play.indexOfPs(com.mans[key].ps,[x,y])) {
         var pace = man.y + "" + man.x;
         play.generateKey[y][x] = key;
         delete play.generateKey[man.y][man.x];
@@ -90,6 +91,13 @@ play.clickPoint = function (x, y) {
         play.show();
         play.pace.push(pace+y+x);
     }
+};
+
+play.indexOfPs = function (ps,xy){
+    for (var i=0; i<ps.length; i++){
+        if (ps[i][0]==xy[0]&&ps[i][1]==xy[1]) return true;
+    }
+    return false;
 };
 
 play.regret = function () {
