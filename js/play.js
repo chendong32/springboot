@@ -47,7 +47,7 @@ play.getClickMan = function (e) {
 };
 play.clickMan = function (key, x, y) {
     var man = play.mans[key];
-    if(!play.nowMankey){
+    if(!play.nowMankey || play.mans[play.nowMankey].pater == man.pater){
         if (play.mans[play.nowMankey]) {
             play.mans[play.nowMankey].alpha = 1;
         }
