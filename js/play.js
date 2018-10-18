@@ -8,6 +8,7 @@ play.init = function () {
     play.isPlay = true;
     play.pace = [];
     play.nowMankey = false;
+    play.ispace = 1;
     play.generateKey = com.arr2Clone (com.generateKey);
     play.mans = com.mans;
     play.showMans = com.showMans;
@@ -47,7 +48,7 @@ play.getClickMan = function (e) {
 };
 play.clickMan = function (key, x, y) {
     var man = play.mans[key];
-    if(!play.nowMankey || play.mans[play.nowMankey].pater == man.pater){
+    if(!play.nowMankey || play.ispace == man.pater){
         if (play.mans[play.nowMankey]) {
             play.mans[play.nowMankey].alpha = 1;
         }
@@ -57,6 +58,7 @@ play.clickMan = function (key, x, y) {
         com.cr.y = y;
         com.cr.isShow = true;
         man.ps = man.bl();
+        play.ispace = man.pater;
         play.show();
     }else if (play.mans[play.nowMankey].pater != man.pater && play.indexOfPs(play.mans[play.nowMankey].ps,[x,y])) {
         var p_man = play.mans[play.nowMankey];
@@ -69,16 +71,16 @@ play.clickMan = function (key, x, y) {
         p_man.alpha = 1;
         com.cr.x = x;
         com.cr.y = y;
-        play.nowMankey = false;
         play.show();
         play.pace.push(pace+y+x);
+        play.ispace = play.ispace > 0 ? 0 : 1;
     }
 };
 play.clickPoint = function (x, y) {
     console.log(play.nowMankey);
     var key = play.nowMankey;
     var man = play.mans[key];
-    if (play.nowMankey && y >= 0 && y <= 9 && play.indexOfPs(com.mans[key].ps,[x,y])) {
+    if (play.nowMankey && y >= 0 && y <= 9 && play.indexOfPs(com.mans[key].ps,[x,y]) && play.ispace == man.pater) {
         var pace = man.y + "" + man.x;
         play.generateKey[y][x] = key;
         delete play.generateKey[man.y][man.x];
@@ -87,9 +89,9 @@ play.clickPoint = function (x, y) {
         man.alpha = 1;
         com.cr.x = x;
         com.cr.y = y;
-        play.nowMankey = false;
         play.show();
         play.pace.push(pace+y+x);
+        play.ispace = play.ispace > 0 ? 0 : 1;
     }
 };
 
@@ -135,6 +137,7 @@ play.regret = function () {
 
     play.generateKey = generateKey;
     play.isPlay=true;
+    play.ispace = play.ispace > 0 ? 0 : 1;
     play.show();
 };
 
