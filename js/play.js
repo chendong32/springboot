@@ -58,7 +58,7 @@ play.clickMan = function (key, x, y) {
         com.cr.isShow = true;
         man.ps = man.bl();
         play.show();
-    }else if (play.mans[play.nowMankey].pater != man.pater) {
+    }else if (play.mans[play.nowMankey].pater != man.pater && play.indexOfPs(play.mans[play.nowMankey].ps,[x,y])) {
         var p_man = play.mans[play.nowMankey];
         var pace = p_man.y + "" + p_man.x;
         play.generateKey[y][x] = p_man.key;
