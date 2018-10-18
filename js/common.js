@@ -22,7 +22,7 @@ function init() {
     com.mans = com.mans || [];
     com.loadImages();
 }
-com.images = ['a_b', 'b_c', 'b_j', 'b_m', 'b_p', 'b_s', 'b_x', 'b_z', 'r_c', 'r_j', 'r_m', 'r_p', 'r_s', 'r_x', 'r_z', 'z_c'];
+com.images = ['a_b', 'b_c', 'b_j', 'b_m', 'b_p', 'b_s', 'b_x', 'b_z', 'r_c', 'r_j', 'r_m', 'r_p', 'r_s', 'r_x', 'r_z', 'z_c', 'z_p'];
 com.loadImages = function () {
     console.log("loadImages");
     for (var i = 0; i < com.images.length; i++) {
@@ -73,8 +73,9 @@ window.onload = function () {
     console.log("onload");
     com.bg = createBg();
     com.cr = createCr();
+    com.dot = createDot();
     com.cr.isShow = false;
-    com.childList = [com.bg, com.cr];
+    com.childList = [com.bg, com.cr, com.dot];
     com.bg.show();
     com.createMans(com.initMap);
     play.init();
@@ -144,6 +145,20 @@ function createCr(x, y) {
         if (cr.isShow) com.ct.drawImage(cr.image, com.pointStartX + com.spaceX * cr.x, com.pointStartY + com.spaceY * cr.y);
     };
     return cr;
+}
+function createDot(x, y) {
+    var dot = new Object;
+    dot.x = x || 0;
+    dot.y = y || 0;
+    dot.image = com[16].image;
+    dot.dots=[];
+    dot.isShow = true;
+    dot.show = function () {
+        for (var i=0; i<dot.dots.length;i++) {
+            if (dot.isShow) com.ct.drawImage(dot.image, com.spaceX * this.dots[i][0]+38  + com.pointStartX ,com.spaceY *  this.dots[i][1]+39 + com.pointStartY);
+        }
+    };
+    return dot;
 }
 com.arr2Clone = function (arr) {
     var newArr = [];

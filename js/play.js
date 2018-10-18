@@ -59,6 +59,7 @@ play.clickMan = function (key, x, y) {
         com.cr.isShow = true;
         man.ps = man.bl();
         play.ispace = man.pater;
+        com.dot.dots = man.ps;
         play.show();
     }else if (play.mans[play.nowMankey].pater != man.pater && play.indexOfPs(play.mans[play.nowMankey].ps,[x,y])) {
         var p_man = play.mans[play.nowMankey];
@@ -71,6 +72,7 @@ play.clickMan = function (key, x, y) {
         p_man.alpha = 1;
         com.cr.x = x;
         com.cr.y = y;
+        com.dot.dots = [];
         play.show();
         play.pace.push(pace+y+x);
         play.ispace = play.ispace > 0 ? 0 : 1;
@@ -89,6 +91,7 @@ play.clickPoint = function (x, y) {
         man.alpha = 1;
         com.cr.x = x;
         com.cr.y = y;
+        com.dot.dots = [];
         play.show();
         play.pace.push(pace+y+x);
         play.ispace = play.ispace > 0 ? 0 : 1;
@@ -135,6 +138,7 @@ play.regret = function () {
         delete generateKey[y][x];
     }
 
+    com.dot.dots = [];
     play.generateKey = generateKey;
     play.isPlay=true;
     play.ispace = play.ispace > 0 ? 0 : 1;

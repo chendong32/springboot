@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="95" height="95">GAME OVER!</canvas>
+<canvas id="myCanvas" width="20" height="20" >GAME OVER!</canvas>
 
 <script>
     var ctx;
@@ -14,7 +14,7 @@
 
     function init(){
         img_bg = new Image();
-        img_bg.src = "./img/r_z.png";
+        img_bg.src = "./img/z_p.png";
         var canvas = document.getElementById('myCanvas');
         if (!canvas.getContext) return;
         ctx = canvas.getContext("2d");
@@ -23,13 +23,14 @@
         };
 
         ctx.beginPath();
-        ctx.arc(47.5,47.5, 47.5, 0, Math.PI * 2);
+        ctx.rotate(-45*Math.PI/180);
+        ctx.rect(-7.5,7.5,14.1,14.1);
         ctx.clip();
     }
     init();
 
     function draw(){
-        ctx.drawImage(img_bg, 0, 0);
+        ctx.drawImage(img_bg, -11, 5);
     }
 
 </script>
