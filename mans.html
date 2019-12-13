@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="20" height="20" >GAME OVER!</canvas>
+<canvas id="myCanvas" width="48" height="48">GAME OVER!</canvas>
 
 <script>
     var ctx;
@@ -14,23 +14,30 @@
 
     function init(){
         img_bg = new Image();
-        img_bg.src = "./img/z_p.png";
+        img_bg.src = "./img/1.jpg";
         var canvas = document.getElementById('myCanvas');
         if (!canvas.getContext) return;
         ctx = canvas.getContext("2d");
         img_bg.onload = function () {
             draw();
         };
-
         ctx.beginPath();
-        ctx.rotate(-45*Math.PI/180);
-        ctx.rect(-7.5,7.5,14.1,14.1);
+        ctx.rect(0, 8,48,32);
         ctx.clip();
+
+        ctx.fillStyle = "#9d9d9d";
+        ctx.fillRect(0,0,48,48);
+
+        ctx.font="20px Arial bold";
+        ctx.fillStyle = "#F3F3F3";
+        ctx.fillText("BaiaI",1,31);
+
+
     }
     init();
 
     function draw(){
-        ctx.drawImage(img_bg, -11, 5);
+        ctx.drawImage(img_bg, 0, 0);
     }
 
 </script>
